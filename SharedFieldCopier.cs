@@ -24,7 +24,6 @@ public static class SharedFieldCopier
                 {
                     if (value.GetType().IsArray)
                     {
-                        // اگر آرایه است
                         var elementType = value.GetType().GetElementType();
                         var arrayCopy = System.Array.CreateInstance(elementType, list.Count);
                         for (int i = 0; i < list.Count; i++)
@@ -35,7 +34,6 @@ public static class SharedFieldCopier
                     }
                     else
                     {
-                        // اگر لیست (مثل List<int>) است
                         var listCopy = (IList)Activator.CreateInstance(value.GetType());
                         foreach (var item in list)
                         {
@@ -91,7 +89,6 @@ public static class SharedFieldCopier
         if (fieldType == copiedType)
             return true;
 
-        // بررسی سازگاری آرایه‌ها و لیست‌ها
         if (typeof(IList).IsAssignableFrom(fieldType) && typeof(IList).IsAssignableFrom(copiedType))
             return true;
 
